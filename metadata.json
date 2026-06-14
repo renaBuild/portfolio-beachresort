@@ -1,0 +1,8 @@
+{
+  "name": "Ginatilan Beach Resort",
+  "description": "Personal portfolio for Ginatilan Beach Resort featuring high-resolution photo galleries and an easy online room booking system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
