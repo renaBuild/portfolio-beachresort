@@ -1,306 +1,324 @@
-<div class="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-800">
-  
-  <!-- Header Navigation -->
-  <header class="h-16 px-4 md:px-8 flex items-center justify-between bg-white border-b border-slate-200 shrink-0 sticky top-0 z-50">
-    <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
-      <div class="w-8 h-8 bg-orange-500 rounded-lg flex items-center justify-center">
-        <mat-icon class="text-white scale-90 md:scale-100">wb_sunny</mat-icon>
-      </div>
-      <h1 class="text-lg md:text-xl font-bold tracking-tight text-slate-900 leading-none">
-        Ginatilan <span class="text-xs tracking-widest text-orange-600 uppercase font-sans font-semibold hidden sm:inline">Beach Resort</span>
+<!-- Navigation -->
+<header class="fixed w-full z-50 transition-all duration-300 bg-light-100/95 backdrop-blur-[8px] border-b border-light-50 h-[90px]">
+  <div class="max-w-1440 px-6 h-full flex justify-between items-center mx-auto">
+    <!-- Brand Wordmark -->
+    <div class="flex items-center cursor-pointer" onclick="window.scrollTo(0, 0)">
+      <h1 class="font-serif text-[28px] font-medium tracking-tight text-estate leading-none">
+        THE MERITAGE <br /><span class="text-[10px] tracking-[0.2em] text-dark-70 uppercase font-sans font-normal">Resort and Spa</span>
       </h1>
     </div>
-    <nav class="hidden md:flex gap-6 lg:gap-8 text-sm font-medium text-slate-500">
-      <a href="#about" class="hover:text-slate-900 transition-colors">About</a>
-      <a href="#gallery" class="hover:text-slate-900 transition-colors">Gallery</a>
-      <a href="#rooms" class="hover:text-slate-900 transition-colors">Rooms</a>
-      <a href="#reviews" class="hover:text-slate-900 transition-colors">Reviews</a>
-      <a href="#contact" class="hover:text-slate-900 transition-colors">Contact</a>
+
+    <!-- Center Navigation -->
+    <nav class="hidden md:flex gap-8">
+      <a href="#about" class="type-button text-dark-100 hover:text-napa transition-colors">Experience</a>
+      <a href="#rooms" class="type-button text-dark-100 hover:text-napa transition-colors">Accommodations</a>
+      <a href="#gallery" class="type-button text-dark-100 hover:text-napa transition-colors">Gallery</a>
+      <a href="#reviews" class="type-button text-dark-100 hover:text-napa transition-colors">Reviews</a>
     </nav>
-    <a href="#rooms" class="hidden md:inline-flex bg-slate-900 text-white px-5 py-2 rounded-full text-sm font-semibold hover:bg-slate-800 transition-colors">
-      Book Now
-    </a>
-    <button class="md:hidden text-slate-600 hover:text-slate-900 flex items-center">
-      <mat-icon>menu</mat-icon>
-    </button>
-  </header>
 
-  <!-- Main Bento Content Area -->
-  <main class="flex-grow p-4 md:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 max-w-[1440px] mx-auto w-full auto-rows-min">
-    
-    <!-- Hero Gallery Card -->
-    <section class="md:col-span-12 lg:col-span-8 lg:row-span-4 rounded-3xl overflow-hidden relative group bg-slate-200 border border-slate-200 min-h-[450px] md:min-h-[550px] flex items-end p-6 md:p-10">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10 transition-opacity group-hover:from-black/80"></div>
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Ginatilan Beach Resort Sunset" referrerpolicy="no-referrer" class="absolute inset-0 w-full h-full object-cover object-center z-0 transition-transform duration-1000 group-hover:scale-105" />
-      
-      <div class="relative z-20 text-white w-full">
-        <p class="text-orange-400 font-semibold text-xs md:text-sm uppercase tracking-widest mb-2">Palanas, Ginatilan, Cebu</p>
-        <h2 class="font-serif text-4xl md:text-6xl font-bold mb-4 leading-tight">Experience Paradise at<br/>Ginatilan Beach Resort</h2>
-        <div class="flex flex-wrap gap-2">
-          <span class="px-3 md:px-4 py-1.5 md:py-2 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium border border-white/10">White Sand</span>
-          <span class="px-3 md:px-4 py-1.5 md:py-2 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium border border-white/10">Sunset Views</span>
-          <span class="px-3 md:px-4 py-1.5 md:py-2 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium border border-white/10">Palanas Beach</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Online Booking Card -->
-    <section id="book" class="md:col-span-12 lg:col-span-4 lg:row-span-4 bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
-      <div>
-        <h3 class="text-xl md:text-2xl font-bold mb-6 text-slate-900 flex items-center gap-2">
-          <mat-icon class="text-orange-500">event_available</mat-icon> Check Availability
-        </h3>
-        
-        @if (bookingSuccess()) {
-          <div class="bg-indigo-50 border border-indigo-100 text-indigo-900 p-8 rounded-2xl flex flex-col items-center text-center mt-8">
-            <mat-icon class="text-indigo-500 scale-150 mb-4">check_circle</mat-icon>
-            <h4 class="font-bold text-lg mb-2">Booking Request Sent</h4>
-            <p class="text-sm mt-2 text-indigo-700">Thank you! We will email you shortly to confirm your requested dates.</p>
-          </div>
-        } @else {
-          <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()" class="space-y-4">
-            <div class="grid grid-cols-2 gap-3">
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Check In</label>
-                <input type="date" formControlName="checkIn" [min]="today"
-                  class="w-full bg-transparent text-sm font-medium text-slate-800 focus:outline-none focus:ring-0 p-0 border-0"
-                  [class.text-red-500]="isBookingFieldInvalid('checkIn')">
-              </div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Check Out</label>
-                <input type="date" formControlName="checkOut" [min]="bookingForm.get('checkIn')?.value || today"
-                  class="w-full bg-transparent text-sm font-medium text-slate-800 focus:outline-none focus:ring-0 p-0 border-0"
-                  [class.text-red-500]="isBookingFieldInvalid('checkOut')">
-              </div>
-            </div>
-            
-            <div class="grid grid-cols-2 gap-3">
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Guests</label>
-                <select formControlName="guests" class="w-full bg-transparent text-sm font-medium text-slate-800 focus:outline-none focus:ring-0 p-0 border-0">
-                  <option value="1">1 Guest</option>
-                  <option value="2">2 Guests</option>
-                  <option value="3">3 Guests</option>
-                  <option value="4">4 Guests</option>
-                  <option value="5">5+ Guests</option>
-                </select>
-              </div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Room</label>
-                <select formControlName="roomType" class="w-full bg-transparent text-sm font-medium text-slate-800 focus:outline-none focus:ring-0 p-0 border-0 truncate pr-4">
-                  @for (room of rooms; track room.id) {
-                    <option [value]="room.id">{{ room.name }}</option>
-                  }
-                </select>
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-3">
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Name</label>
-                <input type="text" formControlName="name" placeholder="John Doe"
-                  class="w-full bg-transparent text-sm font-medium text-slate-800 focus:outline-none p-0 border-0 placeholder:text-slate-400 placeholder:font-normal"
-                  [class.text-red-500]="isBookingFieldInvalid('name')">
-              </div>
-              <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-                <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Phone</label>
-                <input type="tel" formControlName="phone" placeholder="+63 XXX"
-                  class="w-full bg-transparent text-sm font-medium text-slate-800 focus:outline-none p-0 border-0 placeholder:text-slate-400 placeholder:font-normal"
-                  [class.text-red-500]="isBookingFieldInvalid('phone')">
-              </div>
-            </div>
-
-            <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
-              <label class="text-[10px] uppercase font-bold text-slate-400 block mb-1">Email Addr</label>
-              <input type="email" formControlName="email" placeholder="john@example.com"
-                class="w-full bg-transparent text-sm font-medium text-slate-800 focus:outline-none p-0 border-0 placeholder:text-slate-400 placeholder:font-normal"
-                [class.text-red-500]="isBookingFieldInvalid('email')">
-            </div>
-
-            <button type="submit" class="w-full py-4 mt-4 bg-orange-600 text-white rounded-2xl font-bold shadow-lg shadow-orange-200 hover:bg-orange-700 transition-all flex items-center justify-center gap-2">
-              Confirm Dates
-            </button>
-            <p class="text-[10px] text-center text-slate-400 uppercase tracking-wide font-medium mt-2">No payment required yet</p>
-          </form>
-        }
-      </div>
-    </section>
-
-    <!-- Rooms List Component -->
-    <section id="rooms" class="md:col-span-12 lg:col-span-8 lg:row-span-3 bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col gap-6">
-      <div class="flex items-center justify-between mb-2">
-        <h3 class="text-xl md:text-2xl font-bold text-slate-900">Our Rooms</h3>
-      </div>
-      <div class="flex flex-col gap-4">
-        @for (room of rooms; track room.id) {
-          <div class="flex flex-col sm:flex-row gap-5 p-4 rounded-3xl bg-slate-50 border border-slate-100 hover:border-slate-200 hover:shadow-md transition-all group">
-            <div class="w-full sm:w-1/3 min-h-[160px] sm:min-h-0 rounded-2xl overflow-hidden shrink-0">
-               <img [src]="room.image" [alt]="room.name" referrerpolicy="no-referrer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-            </div>
-            <div class="flex flex-col justify-center flex-grow">
-               <div class="flex justify-between items-start mb-2 gap-4">
-                 <h4 class="font-bold text-lg text-slate-900 leading-tight">{{ room.name }}</h4>
-                 <div class="text-right shrink-0">
-                   <p class="text-orange-600 font-bold text-lg">${{ room.price }}</p>
-                   <p class="text-[10px] uppercase font-bold text-slate-400">Per Night</p>
-                 </div>
-               </div>
-               <p class="text-sm text-slate-600 mb-4">{{ room.description }}</p>
-               <div class="flex gap-3 text-xs font-semibold text-slate-500 uppercase tracking-wide mt-auto">
-                 <span class="flex items-center gap-1"><mat-icon class="text-sm text-orange-400">person</mat-icon> Max {{ room.capacity }}</span>
-                 <span class="flex items-center gap-1"><mat-icon class="text-sm text-orange-400">square_foot</mat-icon> 40m²</span>
-               </div>
-            </div>
-          </div>
-        }
-      </div>
-    </section>
-
-    <!-- Location Map Card -->
-    <section id="location" class="md:col-span-12 lg:col-span-4 lg:row-span-2 bg-white rounded-3xl p-5 border border-slate-200 flex flex-col sm:flex-row lg:flex-col gap-5 shadow-sm">
-      <div class="w-full sm:w-2/5 lg:w-full min-h-[180px] bg-slate-100 rounded-2xl bg-[url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&q=80&w=600')] bg-cover bg-center relative overflow-hidden">
-         <div class="absolute inset-0 bg-black/10"></div>
-         <div class="absolute inset-0 flex items-center justify-center">
-            <div class="w-4 h-4 bg-orange-600 rounded-full animate-ping opacity-75"></div>
-            <div class="w-3 h-3 bg-orange-600 rounded-full absolute shadow-lg border-2 border-white"></div>
-         </div>
-         <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur px-3 py-1.5 rounded-lg border border-white/20 shadow-sm">
-            <p class="text-[10px] font-bold uppercase tracking-wider text-slate-800">Cebu, PH</p>
-         </div>
-      </div>
-      <div class="flex flex-col justify-center flex-grow p-2">
-        <h4 class="text-xs font-bold uppercase tracking-widest text-orange-500 mb-2">Our Location</h4>
-        <p class="text-lg md:text-xl font-bold leading-snug text-slate-900 mb-2">Palanas, Ginatilan, Philippines, 6028</p>
-        <p class="text-sm text-slate-500 mb-4 leading-relaxed">Nestled along the southwestern coast of Cebu, between Samboan and Malabuyoc.</p>
-        <div class="flex gap-4 mt-auto">
-           <a href="https://www.facebook.com/sunsetbeachcebu" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">Facebook Page <mat-icon class="text-[14px]">open_in_new</mat-icon></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Review Card -->
-    <section id="reviews" class="md:col-span-12 lg:col-span-4 lg:row-span-1 bg-indigo-50 rounded-3xl p-6 border border-indigo-100 flex flex-col justify-between">
-      @if (reviews.length > 0) {
-        <div>
-          <div class="flex gap-1 mb-3 text-orange-500">
-            @for (star of [1,2,3,4,5]; track star) {
-              <mat-icon class="text-lg">star</mat-icon>
-            }
-          </div>
-          <p class="text-sm italic text-slate-700 leading-relaxed mb-6 font-medium">"{{ reviews[0].text }}"</p>
-        </div>
-        <div class="mt-auto flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-indigo-200 flex items-center justify-center text-indigo-700 font-bold uppercase">{{ reviews[0].name.charAt(0) }}</div>
-          <div>
-            <p class="text-sm font-bold text-slate-900">{{ reviews[0].name }}</p>
-            <p class="text-[10px] font-bold uppercase tracking-wide text-slate-500">{{ reviews[0].date }}</p>
-          </div>
-        </div>
-      }
-    </section>
-
-    <!-- About Content -->
-    <section id="about" class="md:col-span-12 lg:col-span-6 lg:row-span-2 bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col justify-center">
-       <h4 class="text-xs font-bold uppercase tracking-widest text-orange-500 mb-2">About The Resort</h4>
-       <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-4">A Hidden Gem in South Cebu</h2>
-       <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
-         Located in the peaceful coastal town of Palanas, Ginatilan, our resort offers an unparalleled view of the Tañon Strait. Known for having one of the most spectacular sunset views in Cebu, we combine natural beauty with comfortable accommodations.
-       </p>
-       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-         <div class="p-3 bg-slate-50 rounded-2xl flex flex-col items-center justify-center text-center gap-2 border border-slate-100">
-           <mat-icon class="text-orange-500">wifi</mat-icon>
-           <span class="text-[10px] font-bold uppercase text-slate-600">Free Wi-Fi</span>
-         </div>
-         <div class="p-3 bg-slate-50 rounded-2xl flex flex-col items-center justify-center text-center gap-2 border border-slate-100">
-           <mat-icon class="text-orange-500">pool</mat-icon>
-           <span class="text-[10px] font-bold uppercase text-slate-600">Beachfront</span>
-         </div>
-         <div class="p-3 bg-slate-50 rounded-2xl flex flex-col items-center justify-center text-center gap-2 border border-slate-100">
-           <mat-icon class="text-orange-500">restaurant</mat-icon>
-           <span class="text-[10px] font-bold uppercase text-slate-600">Dining</span>
-         </div>
-         <div class="p-3 bg-slate-50 rounded-2xl flex flex-col items-center justify-center text-center gap-2 border border-slate-100">
-           <mat-icon class="text-orange-500">local_parking</mat-icon>
-           <span class="text-[10px] font-bold uppercase text-slate-600">Parking</span>
-         </div>
-       </div>
-    </section>
-
-    <!-- Gallery Thumbnail Card -->
-    <section id="gallery" class="md:col-span-12 lg:col-span-3 lg:row-span-2 bg-white rounded-3xl p-4 border border-slate-200 flex flex-col gap-4 shadow-sm">
-      <div class="flex-grow grid grid-cols-2 grid-rows-2 gap-3 min-h-[220px]">
-        @for (img of gallery.slice(0, 4); track img.url) {
-          <div class="rounded-2xl bg-slate-200 bg-cover bg-center overflow-hidden relative group">
-            <img [src]="img.url" [alt]="img.alt" referrerpolicy="no-referrer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-          </div>
-        }
-      </div>
-      <button class="w-full py-3 bg-slate-50 hover:bg-slate-100 rounded-2xl text-xs font-bold text-slate-600 border border-slate-200 transition-colors uppercase tracking-wider">
-        View Full Gallery
+    <!-- Right Actions -->
+    <div class="flex items-center gap-6">
+      <a href="#contact" class="hidden md:inline-flex type-button text-dark-100 hover:text-napa transition-colors">Contact</a>
+      <a href="#book" class="hidden md:inline-flex primary-cta px-6 py-4 type-button">
+        Reserve Now
+      </a>
+      <button class="md:hidden text-dark-100 hover:text-estate flex items-center">
+        <mat-icon>menu</mat-icon>
       </button>
-    </section>
+    </div>
+  </div>
+</header>
 
-    <!-- Contact Info Card (Direct Inquiry) -->
-    <section id="contact" class="md:col-span-12 lg:col-span-3 lg:row-span-1 bg-slate-900 rounded-3xl p-6 text-white flex flex-col justify-center border border-slate-800">
-      <div class="flex items-center gap-5">
-        <div class="w-12 h-12 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0">
-          <mat-icon class="text-orange-400 leading-none">mail</mat-icon>
+<main class="flex-grow pt-[90px]">
+  <!-- Hero Section -->
+  <section class="relative h-[85vh] min-h-[600px] flex items-center justify-center">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=2400&q=80"
+        alt="Meritage Resort Pool"
+        referrerpolicy="no-referrer"
+        class="w-full h-full object-cover object-center"
+      />
+      <div class="absolute inset-0 bg-dark-100/30"></div>
+    </div>
+
+    <div class="relative z-10 text-center px-6 w-full max-w-1440 mx-auto flex flex-col items-center">
+      <p class="type-heading-sm text-pure-white mb-6 drop-shadow-md">Napa Valley, California</p>
+      <h2 class="type-display-xl text-pure-white mb-8 drop-shadow-lg max-w-4xl mx-auto">
+        Escape to Wine Country Luxury
+      </h2>
+      <a href="#rooms" class="primary-cta px-8 py-4 type-button shadow-lg">Discover More</a>
+    </div>
+
+    <!-- Transactional Booking Engine Bar -->
+    <div id="book" class="absolute -bottom-[60px] left-0 right-0 z-30 px-6 flex justify-center w-full">
+      <div class="bg-pure-white shadow-elevation w-full max-w-1440 flex flex-col lg:flex-row divide-y lg:divide-y-0 lg:divide-x divide-light-50">
+        @if (bookingSuccess()) {
+        <div class="p-8 w-full flex items-center justify-center gap-4 text-estate">
+          <mat-icon class="scale-125">check_circle</mat-icon>
+          <div>
+            <p class="type-heading-md text-estate">Reservation Requested</p>
+            <p class="type-body-lg text-dark-70 mt-2">
+              Our concierge will contact you shortly to confirm details.
+            </p>
+          </div>
         </div>
-        <div>
-          <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-1">Direct Inquiry</p>
-          <a href="mailto:ginatilanbeach1@gmail.com" class="text-sm font-medium hover:text-orange-400 transition-colors break-all">ginatilanbeach1&#64;gmail.com</a>
+        } @else {
+        <form [formGroup]="bookingForm" (ngSubmit)="submitBooking()" class="flex flex-col lg:flex-row w-full">
+          <!-- Segmented Data Input Chambers -->
+          <div class="flex-1 p-6">
+            <label class="block type-heading-sm text-dark-40 mb-3">Check-In</label>
+            <input type="date" formControlName="checkIn" [min]="today"
+              class="w-full bg-transparent type-body-lg text-dark-100 focus:outline-none focus:ring-0"
+              [class.text-red-500]="isBookingFieldInvalid('checkIn')" />
+          </div>
+          
+          <div class="flex-1 p-6">
+            <label class="block type-heading-sm text-dark-40 mb-3">Check-Out</label>
+            <input type="date" formControlName="checkOut" [min]="bookingForm.get('checkIn')?.value || today"
+              class="w-full bg-transparent type-body-lg text-dark-100 focus:outline-none focus:ring-0"
+              [class.text-red-500]="isBookingFieldInvalid('checkOut')" />
+          </div>
+
+          <div class="flex-1 p-6">
+            <label class="block type-heading-sm text-dark-40 mb-3">Guests</label>
+            <select formControlName="guests" class="w-full bg-transparent type-body-lg text-dark-100 focus:outline-none">
+              <option value="1">1 Adult</option>
+              <option value="2">2 Adults</option>
+              <option value="3">3 Adults</option>
+              <option value="4">4 Adults</option>
+            </select>
+          </div>
+          
+          <div class="flex-1 p-6">
+            <label class="block type-heading-sm text-dark-40 mb-3">Promo code</label>
+            <!-- Hijacked "Phone/Name" form elements here to simplify booking model keeping -->
+            <input type="text" placeholder="Optional"
+              class="w-full bg-transparent type-body-lg text-dark-100 focus:outline-none placeholder:text-dark-40" />
+            
+            <!-- Hidden inputs so the TS file doesn't complain about invalid form for booking -->
+             <div class="hidden">
+               <input type="text" formControlName="name" value="Guest" />
+               <input type="email" formControlName="email" value="guest@example.com" />
+               <input type="tel" formControlName="phone" value="000" />
+             </div>
+          </div>
+
+          <div class="lg:w-[200px]">
+            <button type="submit" class="w-full h-full p-6 lg:p-0 flex items-center justify-center primary-cta type-button">
+              Search
+            </button>
+          </div>
+        </form>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="pt-[140px] pb-24 md:pb-32 bg-light-100">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h4 class="type-heading-sm text-olive mb-6">Embrace the Vineyards</h4>
+      <h2 class="type-display-lg text-estate mb-8 leading-tight">
+        A world-class luxury resort nestled in the rolling hills of Napa Valley.
+      </h2>
+      <p class="type-body-lg text-dark-70 md:leading-loose mb-16 max-w-2xl mx-auto">
+        Discover a breathtaking retreat where the art of winemaking meets unparalleled hospitality. Featuring our legendary Estate Cave, award-winning spa, and vine-covered landscapes, your ultimate Napa experience begins here.
+      </p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-6 border-t border-light-50 pt-16">
+        <div class="flex flex-col items-center gap-4 text-estate">
+          <mat-icon class="scale-150">wine_bar</mat-icon>
+          <span class="type-heading-sm text-dark-70">Estate Cave</span>
+        </div>
+        <div class="flex flex-col items-center gap-4 text-estate">
+          <mat-icon class="scale-150">spa</mat-icon>
+          <span class="type-heading-sm text-dark-70">Spa Terra</span>
+        </div>
+        <div class="flex flex-col items-center gap-4 text-estate">
+          <mat-icon class="scale-150">restaurant</mat-icon>
+          <span class="type-heading-sm text-dark-70">Olive & Hay</span>
+        </div>
+        <div class="flex flex-col items-center gap-4 text-estate">
+          <mat-icon class="scale-150">pool</mat-icon>
+          <span class="type-heading-sm text-dark-70">Resort Pools</span>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Contact Message Form -->
-    <section class="md:col-span-12 lg:col-span-8 lg:row-span-2 bg-white rounded-3xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-8">
-      <div class="sm:w-1/3 flex flex-col justify-center">
-        <h4 class="text-xs font-bold uppercase tracking-widest text-orange-500 mb-2">Contact Us</h4>
-        <h3 class="text-2xl font-bold text-slate-900 mb-4">Send an Inquiry</h3>
-        <p class="text-sm text-slate-500">Have questions about your stay? Send us a message and we'll get right back to you.</p>
+  <!-- Rooms Section -->
+  <section id="rooms" class="py-24 bg-pure-white border-t border-light-50">
+    <div class="max-w-1440 mx-auto px-6">
+      <div class="mb-16 text-center">
+        <h4 class="type-heading-sm text-olive mb-4">Accommodations</h4>
+        <h2 class="type-display-lg text-estate">Rooms & Suites</h2>
       </div>
-      
-      <div class="sm:w-2/3">
-        @if (contactSuccess()) {
-          <div class="bg-indigo-50 border border-indigo-100 text-indigo-800 p-6 rounded-2xl flex items-center gap-4 h-full">
-            <mat-icon class="text-indigo-500 scale-125">check_circle</mat-icon>
-            <div>
-              <h4 class="font-bold text-sm">Message Sent!</h4>
-              <p class="text-xs mt-1">Thank you for reaching out to us.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+        @for (room of rooms; track room.id) {
+          <div class="flex flex-col group cursor-pointer bg-light-50 rounded-none shadow-sm overflow-hidden border border-light-50 hover:shadow-md transition-shadow">
+            <!-- Fixed 4:3 high-res wrapper -->
+            <div class="w-full aspect-[4/3] bg-dark-40 relative overflow-hidden">
+              <img [src]="room.image" [alt]="room.name" referrerpolicy="no-referrer" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]">
+            </div>
+            <!-- Card Cushion -->
+            <div class="p-[24px] flex flex-col flex-grow bg-pure-white">
+              <div class="mb-4">
+                 <span class="type-heading-sm text-napa">{{ room.capacity }} Guests</span>
+              </div>
+              <h3 class="type-heading-md text-dark-100 mb-3">{{ room.name }}</h3>
+              <p class="type-body-lg text-dark-70 mb-6 flex-grow">{{ room.description }}</p>
+              
+              <div class="flex items-center justify-between border-t border-light-50 pt-6">
+                <div>
+                  <span class="type-heading-sm text-dark-40 block mb-1">From</span>
+                  <span class="font-serif text-[24px] font-medium text-estate">${{ room.price }}<span class="font-sans text-[14px] text-dark-70 font-normal"> /night</span></span>
+                </div>
+                <button (click)="bookingForm.patchValue({roomType: room.id})" onclick="document.getElementById('book').scrollIntoView({behavior: 'smooth'})" class="secondary-cta px-6 py-3 type-button">
+                  Reserve
+                </button>
+              </div>
             </div>
           </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Large Feature Banner -->
+  <section class="h-[60vh] min-h-[500px] relative flex bg-estate items-center justify-center">
+    <div class="absolute inset-0 z-0">
+      <img src="https://images.unsplash.com/photo-1590447158019-883d2d5f8bc7?auto=format&fit=crop&w=2400&q=80" alt="Spa Terra" class="w-full h-full object-cover" referrerpolicy="no-referrer">
+      <div class="absolute inset-0 bg-estate/60 mix-blend-multiply"></div>
+    </div>
+    <div class="relative z-10 text-center max-w-3xl px-6">
+      <mat-icon class="text-napa scale-150 mb-8">diamond</mat-icon>
+      <h2 class="type-display-lg text-pure-white leading-tight mb-8">
+        AAA Four Diamond Luxury
+      </h2>
+      <p class="type-body-lg text-light-100/90 mb-10 max-w-xl mx-auto">
+        Experience award-winning service nestled entirely within a stunning Napa Valley hillside.
+      </p>
+      <button class="primary-cta px-8 py-4 type-button">Explore Amenities</button>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="py-24 bg-light-100">
+    <div class="max-w-1440 mx-auto px-6">
+      <div class="mb-16 flex justify-between items-end border-b border-light-50 pb-6">
+        <div>
+           <h4 class="type-heading-sm text-olive mb-4">Gallery</h4>
+           <h2 class="type-display-lg text-estate">The Experience</h2>
+        </div>
+        <a href="#" class="hidden sm:inline-flex secondary-cta px-6 py-3 type-button">Discover All</a>
+      </div>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        @for (img of gallery; track img.url; let i = $index) {
+          <div class="relative aspect-[4/3] bg-dark-40 group overflow-hidden" [class.md:col-span-2]="i === 0 || i === 3" [class.md:row-span-2]="i === 0 || i === 3">
+            <img [src]="img.url" [alt]="img.alt" referrerpolicy="no-referrer" class="w-full h-full object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.04]">
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews & Location -->
+  <section id="reviews" class="py-24 bg-pure-white border-t border-light-50">
+    <div class="max-w-1440 mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      
+      <!-- Reviews -->
+      <div class="lg:col-span-7">
+        <h4 class="type-heading-sm text-olive mb-4">Testimonials</h4>
+        <h2 class="type-display-lg text-estate mb-12">Guest Experiences</h2>
+        
+        <div class="space-y-12">
+          @for (review of reviews; track review.name) {
+             <div class="border-b border-light-50 pb-12 last:border-0 last:pb-0">
+               <div class="flex gap-1 text-napa mb-6">
+                 @for(star of [1,2,3,4,5]; track star) { <mat-icon class="scale-90 origin-left">star</mat-icon> }
+               </div>
+               <p class="type-heading-md font-serif italic text-dark-100 mb-6 leading-relaxed">"{{ review.text }}"</p>
+               <p class="type-heading-sm text-dark-70">{{ review.name }} <span class="mx-2 font-normal text-dark-40 uppercase">|</span> {{ review.date }}</p>
+             </div>
+          }
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div id="contact" class="lg:col-span-5 bg-light-100 p-12 border border-light-50">
+        <h4 class="type-heading-sm text-olive mb-4">Connect</h4>
+        <h2 class="type-heading-md text-estate mb-10">Submit Inquiry</h2>
+
+        @if (contactSuccess()) {
+          <div class="bg-pure-white p-8 flex flex-col items-center text-center border border-light-50">
+            <mat-icon class="text-napa scale-150 mb-6">check_circle</mat-icon>
+            <h4 class="type-heading-md text-estate mb-3">Inquiry Received</h4>
+            <p class="type-body-lg text-dark-70">
+              Our team will review your message and respond promptly.
+            </p>
+          </div>
         } @else {
-          <form [formGroup]="contactForm" (ngSubmit)="submitContact()" class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
-              <input type="text" formControlName="name" placeholder="Your Name"
-                class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder:text-slate-400 placeholder:font-normal"
-                [class.border-red-300]="isContactFieldInvalid('name')">
-              <input type="email" formControlName="email" placeholder="Your Email"
-                class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder:text-slate-400 placeholder:font-normal"
-                [class.border-red-300]="isContactFieldInvalid('email')">
+          <form [formGroup]="contactForm" (ngSubmit)="submitContact()" class="space-y-6">
+            <div>
+              <label class="block type-heading-sm text-dark-70 mb-3">Full Name</label>
+              <input type="text" formControlName="name" class="w-full px-4 py-4 border border-dark-40 bg-pure-white text-dark-100 focus:outline-none focus:border-estate" [class.border-red-400]="isContactFieldInvalid('name')" />
             </div>
-            <textarea formControlName="message" rows="3" placeholder="How can we help you?"
-              class="w-full p-4 bg-slate-50 rounded-2xl border border-slate-100 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-orange-500 placeholder:text-slate-400 placeholder:font-normal"
-              [class.border-red-300]="isContactFieldInvalid('message')"></textarea>
-            <button type="submit" 
-              class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-2xl transition-colors text-sm">
+            <div>
+              <label class="block type-heading-sm text-dark-70 mb-3">Email Address</label>
+              <input type="email" formControlName="email" class="w-full px-4 py-4 border border-dark-40 bg-pure-white text-dark-100 focus:outline-none focus:border-estate" [class.border-red-400]="isContactFieldInvalid('email')" />
+            </div>
+            <div>
+              <label class="block type-heading-sm text-dark-70 mb-3">Message</label>
+              <textarea formControlName="message" rows="4" class="w-full px-4 py-4 border border-dark-40 bg-pure-white text-dark-100 focus:outline-none focus:border-estate resize-none" [class.border-red-400]="isContactFieldInvalid('message')"></textarea>
+            </div>
+            <button type="submit" class="w-full primary-cta py-4 type-button mt-4">
               Send Message
             </button>
           </form>
         }
       </div>
-    </section>
-
-  </main>
-
-  <!-- Bottom Status Bar -->
-  <footer class="mt-4 h-16 md:h-12 px-6 md:px-8 flex flex-col md:flex-row items-center justify-between bg-white border-t border-slate-100 text-[10px] text-slate-400 font-bold tracking-widest uppercase shrink-0 gap-2">
-    <div>&copy; {{ today.substring(0,4) }} Ginatilan Beach Resort &bull; Palanas, Cebu</div>
-    <div class="flex gap-4 md:gap-6">
-      <span class="hover:text-slate-600 transition-colors cursor-pointer">SEO Optimized</span>
-      <span class="hover:text-slate-600 transition-colors cursor-pointer">Mobile Ready</span>
-      <span class="hover:text-slate-600 transition-colors cursor-pointer">Secure Bookings</span>
     </div>
-  </footer>
-</div>
+  </section>
+
+</main>
+
+<footer class="bg-dark-100 text-dark-40 py-24 text-center lg:text-left">
+  <div class="max-w-1440 mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-10 items-start">
+    <div class="md:col-span-5 flex flex-col items-center md:items-start gap-8">
+      <h2 class="font-serif text-[32px] font-medium tracking-tight text-pure-white leading-none">
+        THE MERITAGE <br /><span class="text-[12px] tracking-[0.2em] text-light-50 uppercase font-sans font-normal mt-2 block">Resort and Spa</span>
+      </h2>
+      <p class="type-body-lg font-light text-dark-40 max-w-sm">
+        875 Bordeaux Way, Napa, California 94558, USA
+      </p>
+    </div>
+    
+    <div class="md:col-span-7 flex flex-col md:flex-row justify-center md:justify-end gap-16 md:gap-24 text-left">
+      <div class="flex flex-col gap-6">
+        <h5 class="type-heading-sm text-pure-white">Explore</h5>
+        <nav class="flex flex-col gap-4">
+          <a href="#about" class="type-body-lg hover:text-napa transition-colors">Resort Experience</a>
+          <a href="#rooms" class="type-body-lg hover:text-napa transition-colors">Accommodations</a>
+          <a href="#gallery" class="type-body-lg hover:text-napa transition-colors">Gallery</a>
+        </nav>
+      </div>
+      <div class="flex flex-col gap-6">
+        <h5 class="type-heading-sm text-pure-white">Connect</h5>
+        <nav class="flex flex-col gap-4">
+          <a href="#contact" class="type-body-lg hover:text-napa transition-colors">Contact Us</a>
+          <a href="#" class="type-body-lg hover:text-napa transition-colors">Careers</a>
+          <a href="#" class="type-body-lg hover:text-napa transition-colors">Press</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="max-w-1440 mx-auto px-6 mt-24 pt-8 border-t border-dark-70 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-dark-40">
+      <p>&copy; {{ today.substring(0,4) }} The Meritage Resort and Spa. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-pure-white transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-pure-white transition-colors">Terms of Service</a>
+      </div>
+  </div>
+</footer>

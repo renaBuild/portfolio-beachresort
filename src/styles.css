@@ -1,14 +1,109 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --color-estate: #4A1525;
+  --color-olive: #5B6346;
+  --color-napa: #D4AF37;
+  --color-dark-100: #1C1917;
+  --color-dark-70: #44403C;
+  --color-dark-40: #A8A29E;
+  --color-light-100: #FAF8F5;
+  --color-light-50: #F5F2EB;
+  --color-pure-white: #FFFFFF;
+
+  --font-serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --font-sans: "Montserrat", "Inter", sans-serif;
+  
+  --shadow-elevation: 0 8px 24px rgba(74, 21, 37, 0.06);
+}
+
+@utility type-display-xl {
+  font-family: var(--font-serif);
+  font-size: 56px;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+@utility type-display-lg {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+@utility type-heading-md {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  line-height: 1.25;
+  font-weight: 500;
+}
+
+@utility type-heading-sm {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@utility type-body-lg {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+@utility type-button {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--color-light-100);
+  color: var(--color-dark-70);
+  font-family: var(--font-sans);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.max-w-1440 {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.primary-cta {
+  background-color: var(--color-estate);
+  color: var(--color-pure-white);
+  border-radius: 0px;
+  transition: all 300ms ease-in-out;
+}
+.primary-cta:hover {
+  background-color: var(--color-napa);
+  color: var(--color-pure-white);
+}
+
+.secondary-cta {
+  background-color: transparent;
+  color: var(--color-estate);
+  border: 1px solid var(--color-estate);
+  border-radius: 0px;
+  transition: all 300ms ease-in-out;
+}
+.secondary-cta:hover {
+  background-color: var(--color-estate);
+  color: var(--color-pure-white);
 }
 
 /* Hide scrollbar for gallery if needed */
